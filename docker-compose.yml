@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  vprodb:
+    build: 
+      context: ./Dockerfiles/db
+    image: sriuday19/vprodb
+    container_name: vprodb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=vprodbpass
+  
+  vproapp:
+    build: 
+      context: ./Dockerfiles/app
+    image: sriuday19/vproapp
+    container_name: vproapp
+    ports:
+      - "8080:8080"
+    

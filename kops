@@ -1,6 +1,0 @@
-kops create cluster --name=kopsvpro.sriku.xyz \
-> --state=s3://kops-s1-bucket \
-> --dns-zone=kopsvpro.sriku.xyz
-> --zones=us-east-1a,us-east-1b \
-> --node-count=2 --node-size=t3.small --node-volume-size=8 \
-> --master-size=t3.medium --master-volume-size=8 \

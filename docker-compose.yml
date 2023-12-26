@@ -15,6 +15,7 @@ services:
 
   vprocache01:
     image: memcached
+    container_name: mc01
     ports:
       -  "11211:11211"
     networks:
@@ -22,9 +23,10 @@ services:
   
   vpromq01:
     image: rabbitmq
+    container_name: rmq01
     ports:
       - "15672:15672"
-    env:
+    environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
     networks:

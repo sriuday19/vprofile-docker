@@ -12,9 +12,25 @@ services:
       - MYSQL_DATABASE=accounts
     networks:
       - vprofile-net
+
+  vprocache01:
+    image: memcached
+    ports:
+      -  "11211:11211"
+    networks:
+      - vprofile-net
   
+  vpromq01:
+    image: rabbitmq
+    ports:
+      - "15672:15672"
+    env:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - vprofile-net
+
   vproapp:
-    restart: always
     build: 
       context: ./Dockerfiles/app
     image: sriuday19/vproapp
@@ -25,6 +41,17 @@ services:
       - vprofile-net
     depends_on:
       - vprodb
+
+  vproweb:
+    build: 
+      context: ./Dockerfiles/web
+    image: sriuday19/vproweb
+    container_name: vproweb
+    ports:
+      - "80:80"
+    networks:
+      - vprofile-net
+  
 
 networks:
   vprofile-net:
